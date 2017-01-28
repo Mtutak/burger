@@ -1,0 +1,82 @@
+<style media="screen">
+  .burger {
+    height : 100px;
+    width: 100px;
+    color: red;
+    background-color: purple;
+    margin-bottom: 2px;
+  }
+  .devour {
+  	display:inline-block;
+  }
+  .burger {
+  	display: inline-block;
+  }
+  .devourbtn {
+  	padding-bottom: 5px;
+  }
+  .burgers {
+  	margin-top:15px;
+  }
+</style>
+
+<div class='container-fluid text-center'>
+			<div class='row'>
+				<div class="col-sm-12 text-center">
+			      <img src="../public/assets/img/burger.png">
+			    </div>
+			</div>
+			<div class='row'>
+			    <div class="col-sm-12 text-center"> 
+			      <h1 class="main">Eat-Da-Burger!</h1>
+			    </div>
+			</div>
+			<div class='row'>
+			    <div class="col-sm-6 text-center"> 
+			      <div class="bgEntered">
+			      	
+					{{#each burgerSelected }}
+
+					<div class='burgers'>
+						
+						  <p class='burger'>{{this.burger_name}}</p>
+						  <form class="create-update-form" action="/{{this.id}}?_method=PUT" method="POST">
+						  		<input type='hidden' name='id' value='{{this.id}}'>
+						  		<button type="submit" class="btn devourbtn"> Devour! </button>
+							</form>
+						
+					 </div>
+					{{/each}}
+					
+			      </div>
+			    </div>
+			    <div class="col-sm-6 text-center"> 
+			    	{{#each burgerDevoured }}
+			      <div class="bgDevoured">
+			    
+			      	<p class='burger'>{{this.burger_name}}</p>
+			      </div>
+			      	{{/each}}
+			    </div>
+			</div>
+			<div class='row'>
+			    <div class="col-sm-6 col-sm-offset-3 text-center"> 
+			    <form class="create-form devour" action="/" method="POST">
+					<div class="form-group">
+		    			<label for="burger">Enter Dat Sammich!</label>
+		    			<input class="form-control" type="text" id="burger" rows="3" name="burger_name">
+		    			</div>
+		    			<button type="submit" class="btn btn-primary">Submit</button>
+		  		</form>
+		  		</div>
+		  	</div>
+		  	<div class='row'>
+			    <div class="col-sm-12 text-center"> 
+			      <p class="main">ENTER A BURGER AND WATCH SUPER INTERACTIVE EATIN FUN!</p>
+			    </div>
+			</div>
+		</div>  
+
+<footer class="container-fluid text-center">
+  <p>Dat Burga Eaten</p>
+</footer>
