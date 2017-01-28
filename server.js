@@ -25,25 +25,23 @@ var burgers = [{
 // view got through default layout of main
 app.set('view engine', 'handlebars');
 var PORT = process.env.PORT || 3000;
+var bgData;
 // Routes
 app.get("/", function (req, res) {
     var queryString = "SELECT * FROM ?? WHERE devoured = 0";
     connection.query(queryString, ['burgers'], function (err, data) {
         if (err) throw err;
-        res.render('index', {
-            burgerSelected: data
+        console.log(data);
+        var queryString2 = "SELECT * FROM ?? WHERE devoured = 1";
+        connection.query(queryString2, ['burgers'], function (err, data2) {
+            if (err) throw err;
+            console.log(data2);
+            res.render('index', {
+                burgerSelected: data,
+                burgerDevoured: data2
+            });
         });
     });
-});
-app.get("/:id", function (req, res) {
-    var queryString = "SELECT * FROM ?? WHERE devoured = 1";
-    connection.query(queryString, ['burgers'], function (err, data2) {
-        if (err) throw err;
-        res.render('index', {
-            burgerDevoured: data2
-        });
-    });
-    getDevoured();
 });
 app.post("/", function (req, res) {
     console.log(req.body);
@@ -65,8 +63,7 @@ app.put("/:id", function (req, res) {
         if (err) {
             throw err;
         }
-        res.redirect("/" + req.params.id);
-        console.log(req.params.id);
+        res.redirect("/");
     });
 });
 
